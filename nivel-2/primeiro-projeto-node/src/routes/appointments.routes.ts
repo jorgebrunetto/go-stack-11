@@ -1,37 +1,35 @@
 import { Router } from "express";
-import { uuid } from "uuidv4";
-import { startOfHour, parseISO, isEqual } from "date-fns";
+import { parseISO } from "date-fns";
+import AppointmentsRepository from "../repositories/AppointmentsRepository";
+import CreateAppointmentsService from "../services/CreateAppointmentService";
 const appointmentsRouter = Router();
+const appointmentsRepository = new AppointmentsRepository();
 
-interface Appointment {
-  id: string;
-  provider: string;
-  date: Date;
-}
+//Rota: Receber a requisição, chamar outro arquivo, devolver uma resposta.
 
-const appointments: Appointment[]= [];
-
+appointmentsRouter.get("/", (req, res) => {
+  const appointments = appointmentsRepository.all();
+  res.json(appointments);
+});
 // não é necessario passar a rota pois ja esta chamnado no pai
 appointmentsRouter.post("/", (req, res) => {
-  const { provider, date } = req.body;
+  try {
+    const { provider, date } = req.body;
 
-  const parsedDate = startOfHour(parseISO(date));
-  const findAppointmentInSameDate = appointments.find((appointment) =>
-    isEqual(parsedDate, appointment.date)
-  );
+    const parsedDate = parseISO(date);
 
-  if (findAppointmentInSameDate) {
-    return res
-      .status(400)
-      .json({ message: "This appointment is already booked" });
+    const createAppointment = new CreateAppointmentsService(
+      appointmentsRepository
+    );
+    const appointment = createAppointment.execute({
+      date: parsedDate,
+      provider,
+    });
+
+    return res.json(appointment);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
-  const appointment = {
-    id: uuid(),
-    provider,
-    date: parsedDate,
-  };
-  appointments.push(appointment);
-  return res.json(appointment);
 });
 
 export default appointmentsRouter;
