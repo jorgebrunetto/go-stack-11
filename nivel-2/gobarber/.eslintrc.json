@@ -28,14 +28,15 @@
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "argsIgnorePattern": "_"
+        "argsIgnorePattern": "_",
       }
     ],
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "ts": "never"
+        "ts": "never",
+        "tsx": "never"
       }
     ]
   },

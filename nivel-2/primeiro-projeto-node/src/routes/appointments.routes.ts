@@ -19,21 +19,17 @@ appointmentsRouter.get("/", async (req, res) => {
 });
 // não é necessario passar a rota pois ja esta chamnado no pai
 appointmentsRouter.post("/", async (req, res) => {
-  try {
-    const { provider_id, date } = req.body;
+  const { provider_id, date } = req.body;
 
-    const parsedDate = parseISO(date);
+  const parsedDate = parseISO(date);
 
-    const createAppointment = new CreateAppointmentsService();
-    const appointment = await createAppointment.execute({
-      date: parsedDate,
-      provider_id,
-    });
+  const createAppointment = new CreateAppointmentsService();
+  const appointment = await createAppointment.execute({
+    date: parsedDate,
+    provider_id,
+  });
 
-    return res.json(appointment);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
+  return res.json(appointment);
 });
 
 export default appointmentsRouter;
