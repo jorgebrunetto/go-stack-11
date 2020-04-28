@@ -13,7 +13,6 @@
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
@@ -24,6 +23,8 @@
   ],
   "rules": {
     "prettier/prettier": "error",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/camelcase": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
