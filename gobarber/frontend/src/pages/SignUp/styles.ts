@@ -19,7 +19,9 @@ export const Content = styled.div`
   max-width: 700px;
   form {
     margin: 80px 0;
-    width: 340px;
+    width: 100%;
+    padding: 0 16px;
+    max-width: 372px;
     text-align: center;
     h1 {
       margin-bottom: 24px;

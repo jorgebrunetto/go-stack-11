@@ -15,9 +15,9 @@ export const Container = styled.div`
     transition: 0.4s;
 
     position: absolute;
-    bottom: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: calc(100% + 10px);
+    left: calc(-100% + 58px);
+    transform: translateX(-100%);
 
     color: #312e38;
 
@@ -29,8 +29,7 @@ export const Container = styled.div`
       bottom: 20px;
       top: 100%;
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 22px;
     }
   }
   &:hover span {

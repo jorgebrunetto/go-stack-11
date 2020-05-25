@@ -15,6 +15,7 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   display: flex;
   place-items: center;
+  transition: .4s ease;
 
   border: 2px solid #232129;
   color: #666360;
